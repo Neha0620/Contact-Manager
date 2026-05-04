@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Neha0620/Contact-Manager.git'
+                git branch: 'main', url: 'https://github.com/Neha0620/Contact-Manager.git'
             }
         }
 
