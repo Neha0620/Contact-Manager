@@ -1,17 +1,28 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK21'
+        maven 'Maven3'
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Neha0620/Contact-Manager.git'
+                git url: 'https://github.com/Neha0620/Contact-Manager.git', branch: 'main'
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                sh 'mvn clean'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn compile'
             }
         }
 
@@ -20,20 +31,27 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
     }
 
     post {
-        always {
-            // Publish JUnit test results in Jenkins
-            junit 'target/surefire-reports/*.xml'
-        }
-
         success {
-            echo "Build and Tests SUCCESS ✔"
+            echo 'Build SUCCESS ✔'
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
 
         failure {
-            echo "Build FAILED ❌ Check logs"
+            echo 'Build FAILED ❌ Check logs'
+        }
+
+        always {
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
