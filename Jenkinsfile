@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage('Checkout') {
-            steps { git 'https://github.com/<your-repo>.git' }
+            steps { git 'https://github.com/Neha0620/Contact-Manager.git' }
         }
         stage('Build') {
             steps { sh 'mvn clean package' }
