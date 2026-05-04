@@ -1,31 +1,19 @@
 pipeline {
     agent any
-
     stages {
-
         stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/Neha0620/Contact-Manager.git'
-            }
+            steps { git 'https://github.com/<your-repo>.git' }
         }
-
         stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
+            steps { sh 'mvn clean package' }
         }
-
         stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
+            steps { sh 'mvn test' }
         }
     }
-
     post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
