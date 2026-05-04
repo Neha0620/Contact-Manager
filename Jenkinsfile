@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Neha0620/Contact-Manager.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -20,7 +14,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
     }
 
     post {
