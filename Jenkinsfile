@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: params.BRANCH_NAME, url: 'https://github.com/Neha0620/Contact-Manager.git'
+                git branch: params.BRANCH_NAME, url: 'https://github.com/NIHARIKA-T-N/Contact-Manager.git'
             }
         }
 
@@ -31,4 +31,3 @@ pipeline {
         }
     }
 }
-9th one
