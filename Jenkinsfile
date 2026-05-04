@@ -2,11 +2,9 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Neha0620/Contact-Manager.git'
+                git 'https://github.com/Neha0620/Contact-Manager.git'
             }
         }
 
@@ -25,7 +23,7 @@ pipeline {
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
