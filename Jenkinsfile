@@ -11,25 +11,25 @@ pipeline {
 
         stage('Clean') {
             steps {
-                bat 'mvn clean'
+                sh 'mvn clean'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'mvn compile'
+                sh 'mvn compile'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
     }
