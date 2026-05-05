@@ -1,28 +1,16 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Enter branch name')
-    }
-
     stages {
-
         stage('Checkout') {
             steps {
-                git branch: params.BRANCH_NAME,
-                    url: 'https://github.com/Neha0620/Contact-Manager.git'
-            }
-        }
-
-        stage('Clean') {
-            steps {
-                sh 'mvn clean'
+                git branch: 'main', url: 'https://github.com/Neha0620/Contact-Manager.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn package'
+                sh 'mvn clean package'
             }
         }
 
@@ -36,10 +24,6 @@ pipeline {
     post {
         always {
             junit 'target/surefire-reports/*.xml'
-        }
-
-        success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
